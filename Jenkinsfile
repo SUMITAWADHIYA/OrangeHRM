@@ -2,28 +2,28 @@ pipeline {
     agent any
 
     tools {
-        jdk 'JDK11'          // Name of JDK installed in Jenkins (Manage Jenkins → Global Tool Config)
-        maven 'Maven3'       // Name of Maven installed in Jenkins
+        jdk 'JDK17'          // Matches the JDK name in Tools
+        maven 'Maven3'       // Matches the Maven name in Tools
     }
 
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/SUMITAWADHIYA/OrangeHRM',
+                    url: 'https://github.com/SUMITAWADHIYA/OrangeHRM.git',
                     credentialsId: 'github-token'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'mvn clean install -DskipTests'
+                bat 'mvn clean install -DskipTests'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
             post {
                 always {
@@ -41,7 +41,7 @@ pipeline {
 
     post {
         success {
-            echo "✅ Build Successful!"
+            echo "✅ Build Successful on Java 17 with Maven!"
         }
         failure {
             echo "❌ Build Failed!"
