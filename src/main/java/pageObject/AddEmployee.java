@@ -7,26 +7,28 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class AddEmployee extends AbstractComponet {
-        private WebDriver driver;
-        public AddEmployee(WebDriver driver){
-            super(driver);
-            this.driver = driver;
-            PageFactory.initElements(driver,this);
-        }
-        @FindBy(name ="firstName")
-    private WebElement firstName;
+  private WebDriver driver;
 
-        @FindBy(name ="lastName")
-    private WebElement lastName;
+  public AddEmployee(WebDriver driver) {
+    super(driver);
+    this.driver = driver;
+    PageFactory.initElements(driver, this);
+  }
 
-        @FindBy(css="[type='submit']")
-    private WebElement submitBtn;
+  @FindBy(name = "firstName")
+  private WebElement firstName;
 
-        public ViewPersonalDetails addEmployee(String fName , String lName){
-            waitForWebElementToAppear(firstName);
-            firstName.sendKeys(fName);
-            lastName.sendKeys(lName);
-            submitBtn.click();
-            return new ViewPersonalDetails(driver);
-        }
+  @FindBy(name = "lastName")
+  private WebElement lastName;
+
+  @FindBy(css = "[type='submit']")
+  private WebElement submitBtn;
+
+  public ViewPersonalDetails addEmployee(String fName, String lName) {
+    waitForWebElementToAppear(firstName);
+    firstName.sendKeys(fName);
+    lastName.sendKeys(lName);
+    submitBtn.click();
+    return new ViewPersonalDetails(driver);
+  }
 }
